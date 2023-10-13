@@ -22,11 +22,23 @@ public class User {
   
   @Column(name = "phone")
   private String phone;
+  
+  @Column(name = "authenticated")
+  private Boolean authenticated;
+
 
 
   //getters and setters
 
-  public String getPhone() {
+  public Boolean getAuthenticated() {
+	return authenticated;
+}
+
+public void setAuthenticated(Boolean authenticated) {
+	this.authenticated = authenticated;
+}
+
+public String getPhone() {
 	return phone;
 }
 

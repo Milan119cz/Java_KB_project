@@ -1,5 +1,7 @@
 package com.example.live.user;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class UserController {
   
   @Autowired
   private EmailService emailService;
+  @Autowired
+  private HashCodeRepository hashCodeRepository;
 
   @GetMapping
   public List<User> getAllUsers() {
@@ -37,19 +41,44 @@ public class UserController {
 	    try {
 	        UserValidation.testEmail(user.getEmail());
 	        UserValidation.testPhone(user.getPhone());
+	        user.setAuthenticated(false);
 	        userRepository.save(user);
 	        int hashCode= user.getId().hashCode() + user.getName().hashCode()+ user.getEmail().hashCode() + user.getPhone().hashCode();
+	        
 	        emailService.sendEmail(user.getEmail(),"Verification email","Welocome to our service," +'\n'
 	        										+"we are glad that you use our services \n Your verification code," + hashCode + "\n"+
 	        										"You can use this link:"+ "http://localhost:8080/email/verification?id=" + user.getId() + "&hash=" + hashCode);
-	       
-	        createHachCode()
-	        return "User was added";
+	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+	        String message =createHachCode(hashCode, user.getId(), dtf.format(LocalDate.now()));
+	        return "User was added   "+message;
 	        }
 	       catch (Exception e) {
 	       return e.getMessage();
 	      }
   }
+  
+ 	  
+	  public HashCode getHashCodeById(Long id) {
+		    return hashCodeRepository.findById(id).get();
+		  }
+
+
+	  
+	  public String createHachCode(int code, Long userId, String startTime) {
+		 HashCode hashCode= new HashCode();
+		  hashCode.setHashcode(code);
+		  hashCode.setId(userId);
+		  hashCode.setStartTime(startTime);
+		    try {
+		    	hashCodeRepository.save(hashCode);
+		        return "Hash code was added";
+		        }
+		       catch (Exception e) {
+		       return e.getMessage();
+		      }
+	  }
+  
+ 
   
   @PutMapping("/{id}")
   public User updateUser(@PathVariable Long id, @RequestBody User user) {
@@ -60,6 +89,7 @@ public class UserController {
     existingUser.setPhone(user.getPhone());
     return userRepository.save(existingUser);
   }
+  
 
   @DeleteMapping("/{id}")
   public String deleteUser(@PathVariable Long id) {

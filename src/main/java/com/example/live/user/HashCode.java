@@ -1,4 +1,4 @@
-package com.example.live.hashcode;
+package com.example.live.user;
 
 import jakarta.persistence.*;
 
@@ -7,20 +7,14 @@ import jakarta.persistence.*;
 public class HashCode {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "userID")
-  private String userID;
-  
   @Column(name = "hashcode")
-  private String hashcode;
+  private Integer hashcode;
 
   @Column(name = "startTime")
   private String startTime;
-
-
-
 
   //getters and setters
 
@@ -33,19 +27,12 @@ public void setStartTime(String startTime) {
 	this.startTime = startTime;
 }
 
-public String getUserID() {
-	return userID;
-}
 
-public void setUserID(String userID) {
-	this.userID = userID;
-}
-
-public String getHashcode() {
+public Integer getHashcode() {
 	return hashcode;
 }
 
-public void setHashcode(String hashcode) {
+public void setHashcode(Integer hashcode) {
 	this.hashcode = hashcode;
 }
 
