@@ -42,6 +42,8 @@ public class UserController {
 	        emailService.sendEmail(user.getEmail(),"Verification email","Welocome to our service," +'\n'
 	        										+"we are glad that you use our services \n Your verification code," + hashCode + "\n"+
 	        										"You can use this link:"+ "http://localhost:8080/email/verification?id=" + user.getId() + "&hash=" + hashCode);
+	       
+	        createHachCode()
 	        return "User was added";
 	        }
 	       catch (Exception e) {

@@ -21,7 +21,7 @@ public class EmailController {
 	  private UserRepository userRepository;
 
   @GetMapping("/verification?id={id}&hash={hash}")
-  public void VerifydEmain(@PathVariable Long id, @PathVariable String hash) {
+  public void VerifiedEmain(@PathVariable Long id, @PathVariable String hash) {
      User user = userRepository.findById(id).get();
      
   }
