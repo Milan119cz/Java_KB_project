@@ -47,9 +47,9 @@ public class UserController {
 	        
 	        emailService.sendEmail(user.getEmail(),"Verification email","Welocome to our service," +'\n'
 	        										+"we are glad that you use our services \n Your verification code," + hashCode + "\n"+
-	        										"You can use this link:"+ "http://localhost:8080/email/verification?id=" + user.getId() + "&hash=" + hashCode);
+	        										"You can use this link:"+ "http://localhost:8080/api/email/verification?id=" + user.getId() + "&hash=" + hashCode + " Děkujeme za nav");
 	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
-	        String message =createHachCode(hashCode, user.getId(), dtf.format(LocalDate.now()));
+	        String message =createHashCode(hashCode, user.getId(), dtf.format(LocalDate.now()));
 	        return "User was added   "+message;
 	        }
 	       catch (Exception e) {
@@ -64,7 +64,7 @@ public class UserController {
 
 
 	  
-	  public String createHachCode(int code, Long userId, String startTime) {
+	  public String createHashCode(int code, Long userId, String startTime) {
 		 HashCode hashCode= new HashCode();
 		  hashCode.setHashcode(code);
 		  hashCode.setId(userId);

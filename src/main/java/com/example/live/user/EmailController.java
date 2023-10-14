@@ -2,14 +2,16 @@ package com.example.live.user;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/eamil")
+@RequestMapping("/api/email")
 
 public class EmailController {
 
@@ -19,17 +21,21 @@ public class EmailController {
 	  private HashCodeRepository hashCodeRepository;
 
 
-  @GetMapping("/verification?id={id}&hash={hash}")
-  public void VerifiedEmain(@PathVariable Long id, @PathVariable Integer hash) throws Exception {
+  @GetMapping("/verification")
+  public ResponseEntity<String> VerifiedEmain(@RequestParam  Long id, @RequestParam Integer hash) {
 	  System.out.println("spustilo se to");
      User user = userRepository.findById(id).get();
      HashCode hashCode = hashCodeRepository.findById(id).get();
-     if (hashCode.getHashcode()== hash) {
+     System.out.println(hashCode.getHashcode());
+     System.out.println(hash);
+     if (hashCode.getHashcode().equals(hash)) {
     	 System.out.println("stejne");
     	 user.setAuthenticated(true);
-    	 throw new Exception("HashCode is the same");
+    	 userRepository.save(user);
+		return ResponseEntity.ok("Email has been verified");
+ 
      }else {
-    	 throw new Exception("HashCode is not the same");
+    	 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
      }
     	 
   }
