@@ -5,43 +5,43 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "hashcode")
 public class HashCode {
-  
-  @Id
-  //@GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
 
-  @Column(name = "hashcode")
-  private Integer hashcode;
+	@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-  @Column(name = "startTime")
-  private String startTime;
+	@Column(name = "hashcode")
+	private Integer hashcode;
 
-  //getters and setters
+	@Column(name = "startTime")
+	private String startTime;
 
-
-public String getStartTime() {
-	return startTime;
-}
-
-public void setStartTime(String startTime) {
-	this.startTime = startTime;
-}
+	//getters and setters
 
 
-public Integer getHashcode() {
-	return hashcode;
-}
+	public String getStartTime() {
+		return startTime;
+	}
 
-public void setHashcode(Integer hashcode) {
-	this.hashcode = hashcode;
-}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-public Long getId() {
-    return id;
-  }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public Integer getHashcode() {
+		return hashcode;
+	}
+
+	public void setHashcode(Integer hashcode) {
+		this.hashcode = hashcode;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

@@ -5,77 +5,77 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
 
-  @Column(name = "name")
-  private String name;
-  
-  @Column(name = "secondname")
-  private String secondname;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
+	@Column(name = "name")
+	private String name;
 
-@Column(name = "email")
-  private String email;
-  
-  @Column(name = "phone")
-  private String phone;
-  
-  @Column(name = "authenticated")
-  private Boolean authenticated;
+	@Column(name = "secondname")
+	private String secondname;
 
 
+	@Column(name = "email")
+	private String email;
 
-  //getters and setters
+	@Column(name = "phone")
+	private String phone;
 
-  public Boolean getAuthenticated() {
-	return authenticated;
-}
+	@Column(name = "authenticated")
+	private Boolean authenticated;
 
-public void setAuthenticated(Boolean authenticated) {
-	this.authenticated = authenticated;
-}
 
-public String getPhone() {
-	return phone;
-}
 
-public void setPhone(String phone) {
-	this.phone = phone;
-}
+	//getters and setters
 
-public Long getId() {
-    return id;
-  }
+	public Boolean getAuthenticated() {
+		return authenticated;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public void setAuthenticated(Boolean authenticated) {
+		this.authenticated = authenticated;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getPhone() {
+		return phone;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-  public String getEmail() {
-    return email;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  }
-  
-  public String getSecondname() {
-	return secondname;
-}
+	public String getName() {
+		return name;
+	}
 
-public void setSecondname(String secondname) {
-	this.secondname = secondname;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+
+	}
+
+	public String getSecondname() {
+		return secondname;
+	}
+
+	public void setSecondname(String secondname) {
+		this.secondname = secondname;
+	}
 }
